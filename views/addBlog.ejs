@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <title>HomePage</title>
+    <style>
+        /* CSS Styling for the form and page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f3453;
+            color: #000000;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1c5830;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e1e1;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div>
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <label for="cover-image">Cover Image</label>
+            <input type="file" id="cover-image" name="coverImg" accept="image/*" required>
+
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter blog title" required>
+
+            <label for="body">Body</label>
+            <textarea id="body" name="body" rows="5" placeholder="Enter blog content" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('./partials/head') %>
+    <link rel="stylesheet" href="/css/blogstyle.css">
+    <title>Blog | <%= blog.title %></title>
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('./partials/nav') %>
+
+    <!-- Blog Background Wrapper -->
+    <div class="blog-background" style="background-image: url('<%= blog.coverImgUrl %>'); background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat; opacity: 0.5;">
+        
+        <!-- Blog Content Section -->
+        <div class="blog-container">
+            <h1 class="blog-title"><%= blog.title %></h1>
+            <div class="blog-content">
+                <pre class="blog-body"><%= blog.body %></pre>
+            </div>
+        <% if (blog.createdBy) { %>
+            <div class="blog-author">
+                <img src="<%= blog.createdBy.profileImgURL || '/images/default.png' %>" alt="Author Image" class="author-image">
+                <span class="author-name"><%= blog.createdBy.fullname %></span>
+            </div>
+        <% } %>
+           
+        <% if (user && (( blog.createdBy!=null && blog.createdBy.email===user.email) || user.role==="ADMIN")) { %>
+            <!-- Delete Blog Button -->
+            <button id="delete-blog" class="btn btn-danger" data-blog-id="<%= blog._id %>">
+                🗑️ Delete Blog
+            </button>
+        <% } %>
+
+        <% if (user) { %>
+            <!-- Like and Dislike Buttons -->
+            <div class="blog-actions">
+                <button id="like-blog" class="btn btn-primary" data-blog-id="<%= blog._id %>">
+                    👍 Like (<span id="like-count"><%= blog.likes.length || 0 %></span>)
+                </button>
+                <button id="dislike-blog" class="btn btn-danger" data-blog-id="<%= blog._id %>">
+                    👎 Dislike (<span id="dislike-count"><%= blog.dislikes.length || 0 %></span>)
+                </button>
+            </div>
+        <% } else { %>
+            <p>You must be logged in to like or dislike this blog.</p>
+        <% } %>
+        
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comment-section">
+            <h3 class="comment-header">Comments (<%= comments.length %>)</h3>
+
+            <!-- Comment Form -->
+            <% if (locals.user) { %>
+                <form action="/blog/comment/<%= blog._id %>" method="post" class="comment-form">
+                    <div class="input-container">
+                        <input type="text" name="content" placeholder="Enter your comment..." class="comment-input" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            <% } else { %>
+                <p class="login-prompt">Please <a href="/login">log in</a> to leave a comment.</p>
+            <% } %>
+        </div>
+
+        <!-- Comment List -->
+        <div class="comment-list">
+            <% comments.forEach(comment => { %>
+            <div class="comment">
+                <% if (comment.createdBy) { %>
+                    <img src="<%= comment.createdBy.profileImgURL %>" alt="Commenter Image" class="commenter-image">
+                    <span class="commenter-name"><%= comment.createdBy.fullname %></span>
+                <% } else { %>
+                    <span class="commenter-name">DELETED ACCOUNT</span>
+                <% } %>
+                <pre class="comment-content"><%= comment.content %></pre>
+                <!-- Like Button for Comments -->
+                <% if (locals.user) { %>
+                    <button class="like-comment btn btn-primary" data-comment-id="<%= comment._id %>">
+                        👍 Like (<span id="comment-like-<%= comment._id %>"><%= comment.likes.length || 0 %></span>)
+                    </button>
+                <% } %>
+                <!-- Delete Comment Button -->
+                <% if (locals.user && (comment.createdBy.email ===user.email || user.role==="ADMIN")) { %>
+                    <button class="delete-comment btn btn-warning" data-comment-id="<%= comment._id %>">
+                        🗑️ Delete Comment
+                    </button>
+                <% } %>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; <%= new Date().getFullYear() %> Blog. All rights reserved. <a href="#" class="footer-link">Privacy Policy</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/blog.js"></script>
+</body>
+</html>

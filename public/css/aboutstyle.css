@@ -1,0 +1,71 @@
+/* public/stylesheets/about.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f0f8ff;
+    background: url('/general/about.jpg') no-repeat center center fixed;
+    background-size: cover;
+    backdrop-filter: blur(1px); /* Reduced blur */
+    -webkit-backdrop-filter: blur(2px); /* For Safari support */
+}
+
+header {
+    text-align: center;
+    padding: 30px 15px;
+    background: rgba(0, 0, 50, 0.85);
+    border-bottom: 4px solid #0d6efd;
+    box-shadow: 0px 5px 15px rgba(0, 0, 50, 0.5);
+}
+
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #00d4ff;
+    text-shadow: 2px 2px 5px #000;
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(0, 0, 70, 0.85);
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 50, 0.7);
+    padding: 30px;
+    color: #e0f7ff;
+}
+
+main section {
+    margin-bottom: 30px;
+}
+
+main h2 {
+    color: #00bfff;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #00bfff;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+main p, main li {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0, 0, 50, 0.85);
+    border-top: 4px solid #0d6efd;
+    box-shadow: 0px -5px 15px rgba(0, 0, 50, 0.5);
+    color: #00bfff;
+}

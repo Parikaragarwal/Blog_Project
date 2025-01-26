@@ -1,0 +1,306 @@
+/* Reset some basic styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1f1f2e; /* Deep dark background for a techy vibe */
+    color: #e4e4e4; /* Light text color */
+    padding: 0;
+    margin: 0;
+}
+
+/* Blog container - refined */
+.blog-container {
+    background-color: rgba(255, 255, 255, 0.637); /* Lighter background to make text more visible */
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 20px auto; /* Reduced margin */
+    border-radius: 8px;
+    background-image: url('<%= blog.coverImgUrl %>');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Prevent the background from moving */
+    background-repeat: no-repeat; /* Prevent repeating the background image */
+    color: #ffffff; /* White text for blog content */
+    position: relative;
+}
+
+/* Blog container overlay */
+.blog-container:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*background: rgba(0, 0, 0, 0.6); 
+      Darker background overlay */
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.blog-container > * {
+    position: relative;
+    z-index: 2; /* Ensure text is above the overlay */
+}
+
+/* Title styling - More defined and readable */
+.blog-title {
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+    color: #200783; /* Techy blue color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Slight shadow */
+    margin-bottom: 20px;
+    padding: 15px; /* Reduced padding for a more compact look */
+    border: 3px solid #200783; /* Matching border color */
+    border-radius: 10px; /* Rounded corners */
+    background-color: rgba(32, 7, 131, 0.1); /* Slightly translucent background */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the box */
+    display: inline-block; /* Ensures the box wraps tightly around the title */
+}
+
+/* Blog body styling - Ensure readability over background */
+.blog-body {
+    font-size: 20px;
+    line-height: 1.4; /* Reduced line height for more compact text */
+    font-weight: 750; /* Increased weight for a bolder appearance */
+    color: #000000; /* Darker shade for better contrast */
+    white-space: pre-wrap;
+    text-align: justify; /* Justify text for a cleaner look */
+    font-family: 'Roboto', sans-serif; /* You can change this to your preferred font */
+}
+
+/* Author Section styling */
+.blog-author {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark background */
+    border-radius: 8px;
+    max-width: 350px; /* Reduced width */
+    margin-bottom: 40px; /* Increased space below */
+    width: 100%; /* Full width */
+}
+
+.author-image {
+    width: 60px; /* Corrected size for profile image */
+    height: 60px; /* Corrected size for profile image */
+    border-radius: 50%; /* Ensuring it's circular */
+    object-fit: cover; /* Ensure image doesn't distort */
+    margin-right: 15px; /* Spacing between image and name */
+}
+
+.author-name {
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Comment section styling - Non-transparent */
+.comment-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark non-transparent background */
+    border-radius: 8px;
+}
+
+/* Comment header styling */
+.comment-header {
+    font-size: 24px;
+    color: #00bcd4;
+    margin-bottom: 20px;
+}
+
+/* Individual comment styling */
+.comment {
+    align-items: center;
+    background-color: #333; /* Solid dark background */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.commenter-image {
+    border-radius: 50%;
+    margin-right: 15px;
+    max-width: 50px;
+}
+
+/* Styling for comment content */
+.commenter-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00bcd4; /* Techy blue color */
+    margin-bottom: 10px;
+}
+
+.comment-content {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Styling for comment input and form */
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #00bcd4;
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.comment-input::placeholder {
+    color: #bbb;
+}
+
+/* Submit button styling */
+.submit-btn {
+    padding: 12px 20px;
+    background-color: #00bcd4;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #008c9e;
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* Login prompt styling */
+.login-prompt {
+    font-size: 16px;
+    text-align: center;
+    color: #f2f2f2;
+}
+
+.login-prompt a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Techy hover effects for links */
+a:hover {
+    color: #00bcd4;
+    text-decoration: underline;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .blog-container {
+        padding: 15px;
+    }
+    
+    .blog-title {
+        font-size: 22px; /* Reduced font size for mobile */
+    }
+    .comment-section {
+        padding: 10px;
+    }
+
+    .comment {
+        padding: 10px;
+    }
+
+    .comment-input {
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        padding: 10px 15px;
+    }
+
+    .blog-author {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .author-image {
+        margin-bottom: 10px;
+    }
+}
+
+/* Button Hover and Active States */
+.btn {
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #008c9e; /* Interactive hover effect */
+}
+
+.btn:active {
+    transform: scale(0.95); /* Slight scale down on click */
+}
+
+/* Comment Input Focus Effect */
+.comment-input:focus {
+    outline: none;
+    border-color: #00bcd4;
+    background-color: #444; /* Darker background on focus */
+}
+
+/* Footer Padding Enhancement */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px; /* Increased padding for better spacing */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* General Margin for Blog Body and Comment Content */
+.blog-body, .comment-content {
+    margin-bottom: 20px; /* Added bottom margin for spacing */
+}
+
+/* Button Focus State for Accessibility */
+.btn:focus {
+    outline: 2px solid #00bcd4;
+    outline-offset: 2px;
+}
+
+/* Hover Effect for Commenter's Name */
+.commenter-name:hover {
+    color: #008c9e;
+    text-decoration: underline;
+}

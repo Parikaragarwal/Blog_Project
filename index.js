@@ -15,11 +15,12 @@ const Blog = require("./models/blog"); // Added Blog model
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 const app = express();
-const port = 600;
+const port = process.env.PORT || 600;
 
+const mongoPort=process.env.MONGO_URL || "mongodb://localhost:27017/InfoYour";
 // MongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/InfoYour")
+  .connect(mongoPort)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 

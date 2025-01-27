@@ -5,9 +5,9 @@
   <%- include('./partials/head') %>
   <title>Sign-Up</title>
   <style>
-    body {
+   .big-container {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #FFB49A;
       margin: 0;
       padding: 0;
       display: flex;
@@ -20,7 +20,7 @@
       max-width: 500px;
       width: 100%;
       padding: 20px;
-      background: white;
+      background: #393D3F;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -28,6 +28,7 @@
     form {
       display: flex;
       flex-direction: column;
+      color: white;
     }
 
     form label {
@@ -66,7 +67,8 @@
 </head>
 
 <body>
-
+<%- include('./partials/nav') %>
+ <div class="big-container">
   <div class="container">
     <form action="/user/signUp" method="post" enctype="multipart/form-data" >
       <label for="profileImg">Cover Image</label>
@@ -85,7 +87,8 @@
     </form>
   </div>
 
-  <%- include('./partials/scripts') %>  
+  <%- include('./partials/scripts') %> 
+</div> 
 </body>
 
 </html>

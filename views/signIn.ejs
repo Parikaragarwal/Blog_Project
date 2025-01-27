@@ -5,9 +5,9 @@
   <%- include('./partials/head') %>
   <title>Sign-In</title>
   <style>
-    body {
+     .big-container{
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #FFB49A;
       margin: 0;
       padding: 0;
       display: flex;
@@ -20,7 +20,7 @@
       max-width: 500px;
       width: 100%;
       padding: 20px;
-      background: white;
+      background:#393D3F;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -33,6 +33,7 @@
     form label {
       margin-bottom: 5px;
       font-weight: bold;
+      color:white;
     }
 
     form input {
@@ -98,31 +99,29 @@
 </head>
 
 <body>
-  <div class="container">
-    <% if (locals.error) { %>
-      <div class="error-message" role="alert">
-        <%= locals.error %>
+  <%- include('./partials/nav') %>
+  <div class="big-container">
+    <div class="container">
+      <% if (locals.error) { %>
+        <div class="error-message" role="alert">
+          <%= locals.error %>
+        </div>
+        <% } %>
+        
+        <form action="/user/signIn" method="post">
+          <label for="email">Email ID</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+          
+          <button type="submit">Sign In</button>
+        </form>
       </div>
-    <% } %>
 
-    <form action="/user/signIn" method="post">
-      <label for="email">Email ID</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-
-      <button type="submit">Sign In</button>
-    </form>
-
-    <div class="redirect-buttons">
-      <button id="redirectSignUp">Sign Up</button>
-      <button id="redirectHome">Home</button>
+      <%- include('./partials/scripts') %>
+      <script src="/js/signIn.js"></script>
     </div>
-  </div>
-
-  <%- include('./partials/scripts') %>
-  <script src="/js/signIn.js"></script>
-</body>
-
+    </body>
+    
 </html>

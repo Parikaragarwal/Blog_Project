@@ -57,10 +57,31 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
+      margin-bottom: 10px;
     }
 
     form button:hover {
       background-color: #0056b3;
+    }
+
+    .redirect-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .redirect-buttons button {
+      padding: 10px 15px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .redirect-buttons button:hover {
+      background-color: #5a6268;
     }
 
     /* Error message styling */
@@ -85,7 +106,6 @@
     <% } %>
 
     <form action="/user/signIn" method="post">
-
       <label for="email">Email ID</label>
       <input type="email" id="email" name="email" required>
 
@@ -94,9 +114,15 @@
 
       <button type="submit">Sign In</button>
     </form>
+
+    <div class="redirect-buttons">
+      <button id="redirectSignUp">Sign Up</button>
+      <button id="redirectHome">Home</button>
+    </div>
   </div>
 
   <%- include('./partials/scripts') %>
+  <script src="/js/signIn.js"></script>
 </body>
 
 </html>

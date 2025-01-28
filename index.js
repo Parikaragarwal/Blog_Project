@@ -17,7 +17,7 @@ const { checkForAuthenticationCookie } = require("./middlewares/authentication")
 const app = express();
 const port = process.env.PORT || 600;
 
-const mongoPort=process.env.MONGO_URL || "mongodb://localhost:27017/InfoYour";
+const mongoPort=process.env.MONGO_URL;
 // MongoDB connection
 mongoose
   .connect(mongoPort)

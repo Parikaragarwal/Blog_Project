@@ -2,7 +2,7 @@
   "name": "blogging-application",
   "version": "1.0.0",
   "description": "Blogging Application",
-  "main": "\\",
+  "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"
@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.7",
-    "cookieparser": "^0.1.0",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",

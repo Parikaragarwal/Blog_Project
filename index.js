@@ -29,6 +29,16 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // Middleware for handling form submissions and cookies
+app.use(
+  helmet({
+      contentSecurityPolicy: {
+          directives: {
+              defaultSrc: ["'self'"],
+              imgSrc: ["'self'", "data:"],  // ✅ Allow base64 images
+          },
+      },
+  })
+);
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());

@@ -31,15 +31,27 @@ app.set("views", path.resolve("./views"));
 
 // Middleware for handling form submissions and cookies
 app.use(
-  helmet({
-      contentSecurityPolicy: {
-          directives: {
-              defaultSrc: ["'self'"],
-              imgSrc: ["'self'", "data:"],  // ✅ Allow base64 images
-          },
-      },
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Allow only self by default
+      scriptSrc: [
+        "'self'", // Allow self-scripts
+        "https://cdn.jsdelivr.net", // Allow Bootstrap CDN
+      ],
+      styleSrc: [
+        "'self'", 
+        "https://cdn.jsdelivr.net", // Allow Bootstrap CSS from CDN
+        "'unsafe-inline'", // Allow inline styles (required for some Bootstrap components)
+      ],
+      imgSrc: ["'self'", "data:"], // Allow images from self and data URLs
+      connectSrc: ["'self'"], // Allow connection to self (for fetch, xhr, etc.)
+      fontSrc: ["'self'", "https://fonts.gstatic.com"], // Allow Google Fonts
+      objectSrc: ["'none'"], // Disallow <object>, <embed>, <applet>
+      upgradeInsecureRequests: [], // Enable automatic upgrade to HTTPS
+    },
   })
 );
+
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());

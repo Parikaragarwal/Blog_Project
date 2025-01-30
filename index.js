@@ -76,6 +76,8 @@ app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
 app.use(helmet.referrerPolicy({ policy: "no-referrer" }));
 
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 // Route for about page
 app.get("/about", (req, res) => {
   const fullName = req.cookies.fullName;

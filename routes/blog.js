@@ -12,7 +12,7 @@ const router = Router();
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 
-const upload = multer({ blogStorage });
+const upload = multer({ storage: blogStorage });
 
 router.get("/add-new", (req, res) => {
     const dp = req.cookies.dp;
@@ -150,37 +150,34 @@ router.get("/:id", async (req, res) => {
    }
 });
 // Post a new blog
-router.post("/", upload.single("coverImg"), 
-   body('title').trim().isLength({ min: 3 }).withMessage('Title should be at least 3 characters long').escape(),
-   body('body').trim().isLength({ min: 10 }).withMessage('Body should be at least 10 characters long').escape(),
-   async (req, res) => {
+router.post("/", upload.single("coverImg"), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "File upload failed" });
+        }
 
-      // Handle validation errors
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-         return res.status(400).json({ errors: errors.array() });
-      }
+        const { title, body } = req.body;
+        const sanitizedTitle = xss(title);
+        const sanitizedBody = xss(body);
 
-      const { title, body } = req.body;
+        console.log(req.file.path);
+        // Ensure Cloudinary URL is used
+        const coverImgUrl = req.file.path || "/uploads/default.png";
 
-      // Sanitize the inputs to prevent XSS
-      const sanitizedTitle = xss(title);
-      const sanitizedBody = xss(body);
-
-      try {
-         const blog = await Blog.create({
+        const blog = await Blog.create({
             title: sanitizedTitle,
             body: sanitizedBody,
-            coverImgUrl: req.file ? req.file.path : "/uploads/default.png", 
+            coverImgUrl,
             createdBy: req.user._id,
-         });
-         return res.redirect(`/blog/${blog._id}`);
-      } catch (error) {
-         console.error(error);
-         return res.status(500).json({ error: "Internal server error" });
-      }
-   }
-);
+        });
+
+        return res.redirect(`/blog/${blog._id}`);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 // Post a new comment
 router.post("/comment/:blogId", 

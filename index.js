@@ -46,17 +46,17 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"], 
+      defaultSrc: ["'self'"],
       scriptSrc: [
-        "'self'", 
+        "'self'",
         "https://cdn.jsdelivr.net",
       ],
       styleSrc: [
-        "'self'", 
-        "https://cdn.jsdelivr.net", 
-        "'unsafe-inline'", 
+        "'self'",
+        "https://cdn.jsdelivr.net",
+        "'unsafe-inline'",
       ],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com/"], // FIXED: Allow Cloudinary
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com/", "blob:"], // ✅ Added 'blob:'
       connectSrc: ["'self'"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
@@ -64,6 +64,7 @@ app.use(
     },
   })
 );
+
 
 // XSS and other sanitization-related headers
 app.use(helmet.xssFilter());

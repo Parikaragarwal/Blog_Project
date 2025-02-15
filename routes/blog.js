@@ -1,5 +1,8 @@
 const { Router } = require("express");
 const multer = require('multer');
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../utils/cloudinary");
+const { blogStorage } = require("../utils/cloudinary");
 const path = require("path");
 const validator = require('validator');
 const xss = require('xss'); // To sanitize input and prevent XSS attacks
@@ -9,29 +12,7 @@ const router = Router();
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 
-const storage = multer.diskStorage({
-   destination: function (req, file, cb) {
-     cb(null, path.resolve(`./public/uploads`));
-   },
-   filename: function (req, file, cb) {
-     const filename = `${Date.now()}-${file.originalname}`;
-     cb(null, filename);
-   }
-});
-
-const upload = multer({ 
-   storage: storage,
-   fileFilter: (req, file, cb) => {
-      const filetypes = /jpeg|jpg|png|gif/;
-      const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-      const mimetype = filetypes.test(file.mimetype);
-      if (mimetype && extname) {
-         return cb(null, true);
-      }
-      cb("Error: Only image files are allowed!");
-   },
-   limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
-});
+const upload = multer({ blogStorage });
 
 router.get("/add-new", (req, res) => {
     const dp = req.cookies.dp;
@@ -190,10 +171,9 @@ router.post("/", upload.single("coverImg"),
          const blog = await Blog.create({
             title: sanitizedTitle,
             body: sanitizedBody,
-            coverImgUrl: req.file ? `/uploads/${req.file.filename}` : "/uploads/default.png",
+            coverImgUrl: req.file ? req.file.path : "/uploads/default.png", 
             createdBy: req.user._id,
          });
-
          return res.redirect(`/blog/${blog._id}`);
       } catch (error) {
          console.error(error);
